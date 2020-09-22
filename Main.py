@@ -13,11 +13,21 @@ master = Tk()
 master.geometry("200x200") 
 master.title("Chases Job App")
 
-def SaveJobs():
-    JobFile = open("CurrentJobs", "a")
-    JobFile.write
+#def SaveJobs():
+#    JobFile = open("CurrentJobs", "a")
+#    JobFile.write
 
+def example1():
+    def print_sel():
+        print(cal.selection_get())
 
+    top = Toplevel(master)
+
+    cal = Calendar(top,
+                   font="Arial 14", selectmode='day',
+                   cursor="hand1", year=2018, month=2, day=5)
+    cal.pack(fill="both", expand=True)
+    Button(top, text="ok", command=print_sel).pack()
 
 
 #Function to open a new window
@@ -72,7 +82,7 @@ AddJob = Button(master,
 
 ViewJobs = Button(master,
                 text = "View Jobs",
-                command = "")
+                command = example1)
 
 
 
@@ -82,7 +92,7 @@ label = Label(master,
   
 label.pack(pady = 10) 
 AddJob.pack(pady = 10)
-
+ViewJobs.pack(pady = 10)
 
 
 mainloop() 
