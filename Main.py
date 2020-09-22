@@ -2,7 +2,10 @@
 # This will import all the widgets and modules from tkinter and tkinter.ttk 
 from tkinter import * 
 from tkinter.ttk import *
-  
+#Imports date entry wiget from tkcalendar
+from tkcalendar import Calendar, DateEntry
+
+
 # creates a Tk() object 
 master = Tk() 
   
@@ -30,18 +33,32 @@ def openNewWindow():
     newWindow.geometry("200x200") 
   
     # A Label widget to show in toplevel 
+    
+    
+    
+    
+    
     CN = Label(newWindow,
                 text = "Add a new Job")
-    CN.pack(pady = 2)
+    CN.grid(row = 1, column = 0, sticky = W, pady = 2)
     
+    CNText = Entry(newWindow)
+    CNText.grid(row = 1, column = 1, pady = 2)
+
     AP = Label(newWindow,
                 text = "Application Portal")
-    AP.pack(pady = 2)
+    AP.grid(row = 2, column = 0, sticky = W, pady = 2)
     
+    APText = Entry(newWindow)
+    APText.grid(row = 2, column = 1, sticky = W, pady = 2)
+
     AD = Label(newWindow,
             text = "Apply Date")
-    AD.pack(pady = 2)
+    AD.grid(row = 3, column = 0, sticky = W, pady = 2)
     
+    ADText = Entry(newWindow)
+    ADText.grid(row = 3, column = 1, sticky = W, pady = 2)
+
     Label(newWindow,  
           text ="Add a new job",).pack() 
 
