@@ -16,6 +16,7 @@ master.title("Chases Job App")
 def SaveJobs():
     JobFile = open("CurrentJobs", "a")
     JobFile.write(CNText + ';' + APText + ';' + ADText + ';')
+    JobFile.close()
 
 
 
@@ -56,6 +57,11 @@ def openNewWindow():
     
     ADText = Entry(newWindow)
     ADText.grid(row = 3, column = 1, sticky = W, pady = 2)
+    
+    
+    Save
+    
+    
 
     Label(newWindow,  
           text ="Add a new job",).pack() 
