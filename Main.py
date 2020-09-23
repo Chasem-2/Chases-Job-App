@@ -15,7 +15,7 @@ master.title("Chases Job App")
 
 def SaveJobs():
     JobFile = open("CurrentJobs", "a")
-    JobFile.write(APText)
+    JobFile.write(CNText + ';' + APText + ';' + ADText + ';')
 
 
 
