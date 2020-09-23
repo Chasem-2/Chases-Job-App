@@ -31,13 +31,11 @@ def openNewWindow():
   
     # sets the geometry of toplevel 
     newWindow.geometry("200x200") 
-  
-    # A Label widget to show in toplevel 
     
     
     
     
-    
+    #Label
     CN = Label(newWindow,
                 text = "Add a new Job")
     CN.grid(row = 1, column = 0, sticky = W, pady = 2)
