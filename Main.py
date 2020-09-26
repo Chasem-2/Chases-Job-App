@@ -14,24 +14,22 @@ master.geometry("200x200")
 master.title("Chases Job App")
 
 
-
-
 #Function to open a new window
 def openNewWindow(): 
-
 
     #Function for the calendar
     def example1():
         def SetAppDate():
-            AppDateText.insert(cal.selection_get())
+            AppDateText.insert(INSERT, cal.selection_get())
+            top.destroy()
 
         top = Toplevel(master)
 
         cal = Calendar(top,
                     font="Arial 14", selectmode='day',
-                    cursor="hand1", year=2020, month=9, day=22)
+                    cursor="hand1")
         cal.pack(fill="both", expand=True)
-        Button(top, text="ok", command=SetAppDate).pack()
+        Button(top, text="Ok", command=SetAppDate).pack()
 
     #Save Job File Input
     def SaveJob():
@@ -62,7 +60,7 @@ def openNewWindow():
     #Creates First Label
     CompName = Label(newWindow,
 
-                text = "Add a new Job")
+                text = "Position Name")
     CompName.grid(row = 1, column = 0, sticky = W, pady = 2)
     
     CompNameText = Entry(newWindow)
@@ -76,7 +74,7 @@ def openNewWindow():
     AppPortText.grid(row = 2, column = 1, sticky = W, pady = 2)
 
     AppDate = Label(newWindow,
-            text = "Apply Date")
+            text = "Application Date")
     AppDate.grid(row = 3, column = 0, sticky = W, pady = 2)
 
     AppDateText = Entry(newWindow)
