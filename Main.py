@@ -11,70 +11,116 @@ master = Tk()
   
 # sets the geometry of main root window 
 master.geometry("200x200") 
+#Sets Title
 master.title("Chases Job App")
 
-#def SaveJobs():
-#    JobFile = open("CurrentJobs", "a")
-#    JobFile.write
+def ViewJobs():
 
-def example1():
-    def print_sel():
-        print(cal.selection_get())
+    JobListWindow = Toplevel(master)
 
-    top = Toplevel(master)
+    JobListWindow.title("Job List")
 
-    cal = Calendar(top,
-                   font="Arial 14", selectmode='day',
-                   cursor="hand1", year=2018, month=2, day=5)
-    cal.pack(fill="both", expand=True)
-    Button(top, text="ok", command=print_sel).pack()
+    JobListWindow.geometry("200x400")
+
+    JobList = './CurrentJobs'
+    Jobs = open(JobList, 'a')
+
+    Jobs = Label(JobListWindow,
+                text = Jobs)
+    Jobs.grid(row = 1, column = 0, sticky = W, pady =2)
 
 
 #Function to open a new window
 def openNewWindow(): 
-      
+
+
+    #Function for the calendar
+    def example1():
+        def SetAppDate():
+            AppDateText.insert(cal.selection_get())
+
+        top = Toplevel(master)
+
+        cal = Calendar(top,
+                    font="Arial 14", selectmode='day',
+                    cursor="hand1", year=2020, month=9, day=22)
+        cal.pack(fill="both", expand=True)
+        Button(top, text="ok", command=SetAppDate).pack()
+
+    
+
+
+
+
+
+
+    #Save Job File Input
+    def SaveJob():
+        #Open Job File in Append Mode
+        JobFile = open("CurrentJobs", "a")
+        #Create text string retrieving text from entry boxes
+        CNT = CompNameText.get()
+        APT = AppPortText.get()
+        ADT = AppDateText.get()
+        LLT = LinkListText.get()
+        #Saves text from entry files and creates a new line
+        JobFile.write(CNT + ";" + APT + ";" + ADT + ";" + LLT + ";\n")
+        #Closes Job File
+        JobFile.close
+
     # Toplevel object
     newWindow = Toplevel(master) 
   
     # sets the title of toplevel object
-    newWindow.title("New Window") 
+    newWindow.title("New Application") 
   
     # sets the geometry of toplevel 
-    newWindow.geometry("200x200") 
-  
-    # A Label widget to show in toplevel 
+    newWindow.geometry("450x200") 
     
-    
-    
-    
-    
-    CN = Label(newWindow,
+    #Creates First Label
+    CompName = Label(newWindow,
                 text = "Add a new Job")
-    CN.grid(row = 1, column = 0, sticky = W, pady = 2)
+    CompName.grid(row = 1, column = 0, sticky = W, pady = 2)
     
-    CNText = Entry(newWindow)
-    CNText.grid(row = 1, column = 1, pady = 2)
+    CompNameText = Entry(newWindow)
+    CompNameText.grid(row = 1, column = 1, pady = 2)
 
-    AP = Label(newWindow,
+    AppPort = Label(newWindow,
                 text = "Application Portal")
-    AP.grid(row = 2, column = 0, sticky = W, pady = 2)
+    AppPort.grid(row = 2, column = 0, sticky = W, pady = 2)
     
-    APText = Entry(newWindow)
-    APText.grid(row = 2, column = 1, sticky = W, pady = 2)
+    AppPortText = Entry(newWindow)
+    AppPortText.grid(row = 2, column = 1, sticky = W, pady = 2)
 
-    AD = Label(newWindow,
+    AppDate = Label(newWindow,
             text = "Apply Date")
-    AD.grid(row = 3, column = 0, sticky = W, pady = 2)
+    AppDate.grid(row = 3, column = 0, sticky = W, pady = 2)
     
-    ADText = Entry(newWindow)
-    ADText.grid(row = 3, column = 1, sticky = W, pady = 2)
+    AppDateText = Entry(newWindow)
+    #Insert Text here
 
-    Label(newWindow,  
-          text ="Add a new job",).pack() 
+    AppDateText.grid(row = 3, column = 1, sticky = W, pady = 2)
+
+    LinkList = Label(newWindow,
+            text = "Link to job listing")
+    LinkList.grid(row = 4, column = 0, sticky = W, pady = 2)
+
+    LinkListText = Entry(newWindow)
+    LinkListText.grid(row = 4, column = 1, sticky = W, pady = 2)
+
+    Save = Button(newWindow,
+                text = "Save",
+                command = SaveJob)
+    Save.grid(row = 5, column = 1, sticky = W, pady =2)
+    
+    SD = Button(newWindow,
+                text = "Set Application Date",
+                command = example1)
+    SD.grid(row = 3, column = 2, sticky = W, pady = 2)
 
     Button(newWindow,
             text = "Save",
-            command = SaveJobs)
+            command = "")
 
 AddJob = Button(master,
                 text = "Add a new job",
@@ -82,7 +128,7 @@ AddJob = Button(master,
 
 ViewJobs = Button(master,
                 text = "View Jobs",
-                command = example1)
+                command = ViewJobs)
 
 
 
