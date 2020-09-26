@@ -19,16 +19,18 @@ def openNewWindow():
 
     #Function for the calendar
     def example1():
+        #Function to set application date
         def SetAppDate():
             AppDateText.insert(INSERT, cal.selection_get())
             top.destroy()
-
+        #Creates top level window to load calendar into
         top = Toplevel(master)
-
+        #Creates Calendar
         cal = Calendar(top,
                     font="Arial 14", selectmode='day',
                     cursor="hand1")
         cal.pack(fill="both", expand=True)
+        #Creates an Ok button at the bottom of the screen to set the application date
         Button(top, text="Ok", command=SetAppDate).pack()
 
     #Save Job File Input
@@ -57,20 +59,31 @@ def openNewWindow():
 
     newWindow.geometry("450x200") 
     
-    #Creates First Label
+    #Creates Label for the job name
     CompName = Label(newWindow,
 
                 text = "Position Name")
+    
+    #Places Label in row 1, column 0 
     CompName.grid(row = 1, column = 0, sticky = W, pady = 2)
     
+    #Creates Entry box for job name
     CompNameText = Entry(newWindow)
+    
+    #Places Entry box on row 1, column 1 beside the job name Label
     CompNameText.grid(row = 1, column = 1, pady = 2)
 
+    #Creates Label for the application portal link
     AppPort = Label(newWindow,
                 text = "Application Portal")
+    
+    #Places Label on row 2, column 0
     AppPort.grid(row = 2, column = 0, sticky = W, pady = 2)
     
+    #Creates Entry widget to intake Application Portal Link
     AppPortText = Entry(newWindow)
+    
+    #Places Entry widget beside the Label Widget on row 2, coumn 1
     AppPortText.grid(row = 2, column = 1, sticky = W, pady = 2)
 
     AppDate = Label(newWindow,
