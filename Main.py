@@ -14,20 +14,7 @@ master.geometry("200x200")
 #Sets Title
 master.title("Chases Job App")
 
-def ViewJobs():
 
-    JobListWindow = Toplevel(master)
-
-    JobListWindow.title("Job List")
-
-    JobListWindow.geometry("200x400")
-
-    JobList = './CurrentJobs'
-    Jobs = open(JobList, 'a')
-
-    Jobs = Label(JobListWindow,
-                text = Jobs)
-    Jobs.grid(row = 1, column = 0, sticky = W, pady =2)
 
 
 #Function to open a new window
@@ -75,10 +62,12 @@ def openNewWindow():
     newWindow.title("New Application") 
   
     # sets the geometry of toplevel 
+
     newWindow.geometry("450x200") 
     
     #Creates First Label
     CompName = Label(newWindow,
+
                 text = "Add a new Job")
     CompName.grid(row = 1, column = 0, sticky = W, pady = 2)
     
@@ -95,7 +84,7 @@ def openNewWindow():
     AppDate = Label(newWindow,
             text = "Apply Date")
     AppDate.grid(row = 3, column = 0, sticky = W, pady = 2)
-    
+
     AppDateText = Entry(newWindow)
     #Insert Text here
 
@@ -105,6 +94,9 @@ def openNewWindow():
             text = "Link to job listing")
     LinkList.grid(row = 4, column = 0, sticky = W, pady = 2)
 
+    ADText = Entry(newWindow)
+    ADText.grid(row = 3, column = 1, sticky = W, pady = 2)
+    
     LinkListText = Entry(newWindow)
     LinkListText.grid(row = 4, column = 1, sticky = W, pady = 2)
 
