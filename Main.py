@@ -1,4 +1,3 @@
-
 # This will import all the widgets and modules from tkinter and tkinter.ttk 
 from tkinter import * 
 from tkinter.ttk import *
@@ -34,13 +33,6 @@ def openNewWindow():
         cal.pack(fill="both", expand=True)
         Button(top, text="ok", command=SetAppDate).pack()
 
-    
-
-
-
-
-
-
     #Save Job File Input
     def SaveJob():
         #Open Job File in Append Mode
@@ -54,6 +46,8 @@ def openNewWindow():
         JobFile.write(CNT + ";" + APT + ";" + ADT + ";" + LLT + ";\n")
         #Closes Job File
         JobFile.close
+
+    #View Saved Jobs
 
     # Toplevel object
     newWindow = Toplevel(master) 
@@ -93,9 +87,6 @@ def openNewWindow():
     LinkList = Label(newWindow,
             text = "Link to job listing")
     LinkList.grid(row = 4, column = 0, sticky = W, pady = 2)
-
-    ADText = Entry(newWindow)
-    ADText.grid(row = 3, column = 1, sticky = W, pady = 2)
     
     LinkListText = Entry(newWindow)
     LinkListText.grid(row = 4, column = 1, sticky = W, pady = 2)
@@ -110,23 +101,19 @@ def openNewWindow():
                 command = example1)
     SD.grid(row = 3, column = 2, sticky = W, pady = 2)
 
-    Button(newWindow,
-            text = "Save",
-            command = "")
-
 AddJob = Button(master,
                 text = "Add a new job",
                 command = openNewWindow)
 
 ViewJobs = Button(master,
                 text = "View Jobs",
-                command = ViewJobs)
+                command = "ViewJobs")
 
 
 
 
 label = Label(master,  
-              text ="This is the main window") 
+              text ="Welcome!") 
   
 label.pack(pady = 10) 
 AddJob.pack(pady = 10)
