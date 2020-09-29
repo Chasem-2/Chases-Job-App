@@ -35,19 +35,19 @@ def openNewWindow():
 
     #Save Job File Input
     def SaveJob():
-        #Open Job File in Append Mode
-        JobFile = open("CurrentJobs", "a")
         #Create text string retrieving text from entry boxes
-        CNT = CompNameText.get()
+        PNT = PosNameText.get()
         APT = AppPortText.get()
         ADT = AppDateText.get()
         LLT = LinkListText.get()
+        
+        #Open Job File in Append Mode
+        JobFile = open("CurrentJobs", "a")
         #Saves text from entry files and creates a new line
-        JobFile.write(CNT + ";" + APT + ";" + ADT + ";" + LLT + ";\n")
+        JobFile.write("1 " + PNT + "\n" + "2 " + APT + "\n" + "3 " + ADT + "\n" + "4 " + LLT + "\n")
         #Closes Job File
         JobFile.close
 
-    #View Saved Jobs
 
     # Toplevel object
     newWindow = Toplevel(master) 
@@ -56,22 +56,20 @@ def openNewWindow():
     newWindow.title("New Application") 
   
     # sets the geometry of toplevel 
-
     newWindow.geometry("450x200") 
     
     #Creates Label for the job name
-    CompName = Label(newWindow,
-
+    PosName = Label(newWindow,
                 text = "Position Name")
     
     #Places Label in row 1, column 0 
-    CompName.grid(row = 1, column = 0, sticky = W, pady = 2)
+    PosName.grid(row = 1, column = 0, sticky = W, pady = 2)
     
     #Creates Entry box for job name
-    CompNameText = Entry(newWindow)
+    PosNameText = Entry(newWindow)
     
     #Places Entry box on row 1, column 1 beside the job name Label
-    CompNameText.grid(row = 1, column = 1, pady = 2)
+    PosNameText.grid(row = 1, column = 1, pady = 2)
 
     #Creates Label for the application portal link
     AppPort = Label(newWindow,
@@ -91,7 +89,6 @@ def openNewWindow():
     AppDate.grid(row = 3, column = 0, sticky = W, pady = 2)
 
     AppDateText = Entry(newWindow)
-    #Insert Text here
 
     AppDateText.grid(row = 3, column = 1, sticky = W, pady = 2)
 
@@ -102,6 +99,19 @@ def openNewWindow():
     LinkListText = Entry(newWindow)
     LinkListText.grid(row = 4, column = 1, sticky = W, pady = 2)
 
+
+
+
+
+
+
+
+
+
+
+
+
+    #Saves input to CurrentJobs file
     Save = Button(newWindow,
                 text = "Save",
                 command = SaveJob)
@@ -112,13 +122,41 @@ def openNewWindow():
                 command = example1)
     SD.grid(row = 3, column = 2, sticky = W, pady = 2)
 
+def ViewJobs():
+    #Create view jobs window
+    ViewJobsWindow = Toplevel(master)
+
+    #Set the title for the window
+    ViewJobsWindow.title("Current Jobs")
+
+    #Set the size of the window
+    ViewJobsWindow.geometry("450x200") 
+
+
+    #Opens file as f, then creates a dictionary d
+    with open('CurrentJobs') as f:
+        d = dict(x.rstrip().split(None, 1) for x in f)
+
+
+
+
+    #Creates first job name entry
+    JobNameEntry = Entry(ViewJobsWindow)
+    #Places Entry widget beside the Label Widget on row 2, coumn 1
+    JobNameEntry.grid(row = 0, column = 0, sticky = W, pady = 2)
+    #Inserts position name for the first position in the file
+    JobNameEntry.insert(INSERT, d.get("1"))
+
+
+
+
 AddJob = Button(master,
                 text = "Add a new job",
                 command = openNewWindow)
 
 ViewJobs = Button(master,
                 text = "View Jobs",
-                command = "ViewJobs")
+                command = ViewJobs)
 
 
 
