@@ -1,6 +1,8 @@
 # This will import all the widgets and modules from tkinter and tkinter.ttk 
+import os
 from tkinter import * 
 from tkinter.ttk import *
+from tkinter import ttk
 #Imports date entry wiget from tkcalendar
 from tkcalendar import Calendar, DateEntry
 
@@ -99,18 +101,6 @@ def openNewWindow():
     LinkListText = Entry(newWindow)
     LinkListText.grid(row = 4, column = 1, sticky = W, pady = 2)
 
-
-
-
-
-
-
-
-
-
-
-
-
     #Saves input to CurrentJobs file
     Save = Button(newWindow,
                 text = "Save",
@@ -130,25 +120,78 @@ def ViewJobs():
     ViewJobsWindow.title("Current Jobs")
 
     #Set the size of the window
-    ViewJobsWindow.geometry("450x200") 
+    ViewJobsWindow.geometry("600x400") 
+
+    def OpenJobFile():
+    
+        root = Tk()
+        root.geometry('320x240')
+        f = Frame(root)
+        tv = ttk.Treeview(f, show = 'tree')
+        ybar = Scrollbar(f,orient = VERTICAL,
+                  command = tv.yview)
+        tv.configure(yscroll = ybar.set)
+        directory = './Jobs'
+        tv.heading('#0',text = 'Dir：' + directory,anchor = 'w')
+        path = os.path.abspath(directory)
+        node = tv.insert('','end',text = path,open = True)
+        def traverse_dir(parent,path):
+            for d in os.listdir(path):
+                full_path = os.path.join(path,d)
+                isdir = os.path.isdir(full_path)
+                id=tv.insert(parent,'end',text=d,open=False)
+                if isdir:
+                    traverse_dir(id,full_path)
+        traverse_dir(node,path)
+        
+        OpenFile = Button(root,
+                    text = "Open File",
+                    command = "")
+        
+        
+        
+        
+        
+        ybar.pack(side=RIGHT,fill=Y)
+        tv.pack()
+        f.pack()
+        OpenFile.pack()
+        root.mainloop()
+       
+
+
+
 
 
     #Opens file as f, then creates a dictionary d
     with open('CurrentJobs') as f:
         d = dict(x.rstrip().split(None, 1) for x in f)
 
-
-
-
+    #Creates Job Name Label
+    JobName = Label(ViewJobsWindow,
+                text = "Position Name")
+    #Places Job Name Label
+    JobName.grid(row = 0, column = 0, sticky = W, pady = 2)
     #Creates first job name entry
     JobNameEntry = Entry(ViewJobsWindow)
-    #Places Entry widget beside the Label Widget on row 2, coumn 1
-    JobNameEntry.grid(row = 0, column = 0, sticky = W, pady = 2)
+    #
+    JobNameEntry.grid(row = 0, column = 1, sticky = W, pady = 2)
     #Inserts position name for the first position in the file
     JobNameEntry.insert(INSERT, d.get("1"))
 
 
 
+    #Creates Application Portal Display
+    AppPortal = Entry(ViewJobsWindow)
+    #Places Application Portal Display
+    AppPortal.grid(row = 1, column = 1, sticky = W, pady = 2)
+    #Inserts Application portal from file
+    AppPortal.insert(INSERT, d.get("2"))
+
+    OpenNewFile = Button(ViewJobsWindow,
+                text = "Open Job File",
+                command = OpenJobFile)
+    OpenNewFile.grid(row = 3, column = 0, sticky = W, pady =2)
 
 AddJob = Button(master,
                 text = "Add a new job",
