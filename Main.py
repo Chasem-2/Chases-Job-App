@@ -122,6 +122,7 @@ def ViewJobs():
     #Set the size of the window
     ViewJobsWindow.geometry("600x400") 
 
+    #Creates the ability to open new job files
     def OpenJobFile():
     
         root = Tk()
