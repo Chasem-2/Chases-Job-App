@@ -21,32 +21,40 @@ def openNewWindow():
 
     #Function for the calendar
     def example1():
+        
         #Function to set application date
         def SetAppDate():
             AppDateText.insert(INSERT, cal.selection_get())
             top.destroy()
+        
         #Creates top level window to load calendar into
         top = Toplevel(master)
+        
         #Creates Calendar
         cal = Calendar(top,
                     font="Arial 14", selectmode='day',
                     cursor="hand1")
         cal.pack(fill="both", expand=True)
+        
         #Creates an Ok button at the bottom of the screen to set the application date
         Button(top, text="Ok", command=SetAppDate).pack()
 
     #Save Job File Input
     def SaveJob():
+        
         #Create text string retrieving text from entry boxes
         PNT = PosNameText.get()
         APT = AppPortText.get()
         ADT = AppDateText.get()
         LLT = LinkListText.get()
-        
+
+        JobFileLocation = "./JobsFile/"
         #Open Job File in Append Mode
-        JobFile = open("CurrentJobs", "a")
-        #Saves text from entry files and creates a new line
-        JobFile.write("1 " + PNT + "\n" + "2 " + APT + "\n" + "3 " + ADT + "\n" + "4 " + LLT + "\n")
+        JobFile = open(JobFileLocation + PNT, "a")
+        
+        #Saves text from entry boxes and creates new lines
+        JobFile.write(PNT + "\n" + APT + "\n" +ADT + "\n" +LLT + "\n")
+        
         #Closes Job File
         JobFile.close
 
@@ -123,44 +131,7 @@ def ViewJobs():
     ViewJobsWindow.geometry("600x400") 
 
     #Creates the ability to open new job files
-    def OpenJobFile():
-    
-        root = Tk()
-        root.geometry('320x240')
-        f = Frame(root)
-        tv = ttk.Treeview(f, show = 'tree')
-        ybar = Scrollbar(f,orient = VERTICAL,
-                  command = tv.yview)
-        tv.configure(yscroll = ybar.set)
-        directory = './Jobs'
-        tv.heading('#0',text = 'Dir：' + directory,anchor = 'w')
-        path = os.path.abspath(directory)
-        node = tv.insert('','end',text = path,open = True)
-        def traverse_dir(parent,path):
-            for d in os.listdir(path):
-                full_path = os.path.join(path,d)
-                isdir = os.path.isdir(full_path)
-                id=tv.insert(parent,'end',text=d,open=False)
-                if isdir:
-                    traverse_dir(id,full_path)
-        traverse_dir(node,path)
-        
-        OpenFile = Button(root,
-                    text = "Open File",
-                    command = "")
-        
-        
-        
-        
-        
-        ybar.pack(side=RIGHT,fill=Y)
-        tv.pack()
-        f.pack()
-        OpenFile.pack()
-        root.mainloop()
-       
-
-
+    #    def OpenJobFile():
 
 
 
