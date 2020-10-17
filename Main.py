@@ -1,5 +1,6 @@
 # This will import all the widgets and modules from tkinter and tkinter.ttk 
 import os
+import touch
 from tkinter import * 
 from tkinter.ttk import *
 from tkinter import ttk
@@ -48,15 +49,21 @@ def openNewWindow():
         ADT = AppDateText.get()
         LLT = LinkListText.get()
 
-        JobFileLocation = "./JobsFile/"
+        #Sets location for saved job to be placed
+        JobFileLocation = './JobsFile/' + PNT
+        
+        #Creates job file in the jobs folder
+        touch.touch(JobFileLocation)
+
         #Open Job File in Append Mode
-        JobFile = open(JobFileLocation + PNT, "a")
+        JobFile = open(JobFileLocation, "a")
         
         #Saves text from entry boxes and creates new lines
         JobFile.write(PNT + "\n" + APT + "\n" +ADT + "\n" +LLT + "\n")
         
         #Closes Job File
         JobFile.close
+        newWindow.destroy()
 
 
     # Toplevel object
